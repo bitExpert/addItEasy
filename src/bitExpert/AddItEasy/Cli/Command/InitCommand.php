@@ -101,7 +101,7 @@ class InitCommand extends Command
         $content .= '$EASY_CONF["app"]["assetdir"] = __DIR__ . "/../assets";' . PHP_EOL;
         $content .= '$EASY_CONF["app"]["logfile"] = $EASY_CONF["app"]["cachedir"] . "/addITeasy.log";' . PHP_EOL;
         $content .= '$EASY_CONF["app"]["datadir"] = __DIR__ . "/../content";' . PHP_EOL;
-        $content .= '$EASY_CONF["app"]["templatedir"] = __DIR__ . "/../template/default/";' . PHP_EOL;
+        $content .= '$EASY_CONF["app"]["templatedir"] = __DIR__ . "/../template/";' . PHP_EOL;
         $content .= '$EASY_CONF["app"]["exportdir"] = __DIR__ . "/../export";' . PHP_EOL;
         $content .= '$EASY_CONF["app"]["defaultpage"] = "";' . PHP_EOL;
         $content .= PHP_EOL;
