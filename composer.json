@@ -1,6 +1,6 @@
 {
-  "name": "bitexpert/addItEasy",
-  "description": "PSR-7 compatible flat file CMS",
+  "name": "bitexpert/additeasy",
+  "description": "PSR-7 compatible flat-file CMS",
   "minimum-stability": "stable",
   "license": "Apache-2.0",
   "authors": [
@@ -16,7 +16,7 @@
     "bitexpert/disco": "^0.3.0",
     "bitexpert/slf4psrlog": "^0.1.3",
     "monolog/monolog": "^1.14.0",
-    "symfony/console": "2.8.6"
+    "symfony/console": "^2.8.6"
   },
   "bin": ["bin/addItEasy"],
   "autoload": {
