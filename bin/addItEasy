@@ -1,0 +1,32 @@
+#!/usr/bin/env php
+<?php
+
+/*
+ * This file is part of the addItEasy package.
+ *
+ * (c) bitExpert AG
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+$autoloadFiles = [__DIR__ . '/../vendor/autoload.php', __DIR__ . '/../../../autoload.php'];
+foreach ($autoloadFiles as $autoloadFile) {
+    if (file_exists($autoloadFile)) {
+        require_once $autoloadFile;
+        break;
+    }
+}
+
+$projectConfig = __DIR__ . '/../../../../config/config.inc.php';
+if (file_exists($autoloadFile)) {
+    require_once $projectConfig;
+}
+
+require_once __DIR__ . '/../src/bootstrap.php';
+
+$beanFactory = \bitExpert\Disco\BeanFactoryRegistry::getInstance();
+
+/** @var \bitExpert\AddItEasy\Cli\Application $app **/
+$app = $beanFactory->get('cliapp');
+$app->run();

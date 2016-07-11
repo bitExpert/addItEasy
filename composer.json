@@ -1,0 +1,27 @@
+{
+  "name": "bitexpert/addItEasy",
+  "description": "PSR-7 compatible flat file CMS",
+  "minimum-stability": "stable",
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "Stephan Hochdörfer",
+      "email": "S.Hochdoerfer@bitExpert.de",
+      "homepage": "http://www.bitExpert.de"
+    }
+  ],
+  "require": {
+    "php": "^7.0",
+    "bitexpert/adrenaline": "^0.1.0",
+    "bitexpert/disco": "^0.3.0",
+    "bitexpert/slf4psrlog": "^0.1.3",
+    "monolog/monolog": "^1.14.0",
+    "symfony/console": "2.8.6"
+  },
+  "bin": ["bin/addItEasy"],
+  "autoload": {
+    "psr-4": {
+      "bitExpert\\AddItEasy\\": "src/bitExpert/AddItEasy"
+    }
+  }
+}
