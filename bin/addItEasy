@@ -19,7 +19,7 @@ foreach ($autoloadFiles as $autoloadFile) {
 }
 
 $projectConfig = __DIR__ . '/../../../../config/config.inc.php';
-if (file_exists($autoloadFile)) {
+if (file_exists($projectConfig)) {
     require_once $projectConfig;
 }
 
