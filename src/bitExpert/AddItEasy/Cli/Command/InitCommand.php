@@ -119,10 +119,10 @@ class InitCommand extends Command
     protected function getFrontControllerTemplate()
     {
         $content = '<?php' . PHP_EOL;
-        $content .= 'require __DIR__ . "/vendor/autoload.php"' . PHP_EOL;
-        $content .= 'require __DIR__ . "/config/config.inc.php"' . PHP_EOL;
+        $content .= 'require __DIR__ . "/vendor/autoload.php";' . PHP_EOL;
+        $content .= 'require __DIR__ . "/config/config.inc.php";' . PHP_EOL;
         $content .= '// bootstrap and run addITeasy' . PHP_EOL;
-        $content .= 'require __DIR__ . "/vendor/bitexpert/addITeasy/src/bootstrap.php"' . PHP_EOL;
+        $content .= 'require __DIR__ . "/vendor/bitexpert/additeasy/src/bootstrap.php";' . PHP_EOL;
         return $content;
     }
 
