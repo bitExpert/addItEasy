@@ -39,7 +39,7 @@ class TwigResponder implements Responder
     protected $siteParams;
 
     /**
-     * Creates a new {\bitExpert\Gilbly\Http\Responder\TwigResponder}.
+     * Creates a new {\bitExpert\AddItEasy\Http\Responder\TwigResponder}.
      *
      * @param \Twig_Environment $twig
      * @param array $siteParams key/value collection of default global variables
