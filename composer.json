@@ -12,8 +12,9 @@
   ],
   "require": {
     "php": "^7.0",
-    "bitexpert/adrenaline": "^0.1.0",
-    "bitexpert/disco": "^0.3.0",
+    "bitexpert/adrenaline": "^0.2.0",
+    "zendframework/zend-stratigility": "~1.2.0",
+    "bitexpert/disco": "^0.6.0",
     "bitexpert/slf4psrlog": "^0.1.3",
     "monolog/monolog": "^1.14.0",
     "symfony/console": "^2.8.6"

@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+declare(strict_types = 1);
 
 $APP_CONF = [];
 
@@ -29,7 +30,6 @@ if (isset($EASY_CONF, $EASY_CONF['app'])) {
 $APP_CONF['di'] = [];
 $APP_CONF['di']['config'] = \bitExpert\AddItEasy\Config::class;
 $APP_CONF['di']['cache'] = $APP_CONF['app']['cachedir'].'/di/';
-$APP_CONF['di']['devMode'] = false;
 
 // Logger configuration
 $APP_CONF['logger'] = [];
@@ -37,4 +37,4 @@ $APP_CONF['logger']['logfile'] = $APP_CONF['app']['logfile'];
 $APP_CONF['logger']['level'] = \Monolog\Logger::DEBUG;
 
 // Site configuration (these variables will get passed to the twig template)
-$APP_CONF['site'][] = isset($EASY_CONF['site']) ? $EASY_CONF['site'] : [];
+$APP_CONF['site'] = isset($EASY_CONF['site']) ? $EASY_CONF['site'] : [];

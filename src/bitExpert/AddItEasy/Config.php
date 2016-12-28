@@ -8,6 +8,8 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+declare(strict_types = 1);
+
 namespace bitExpert\AddItEasy;
 
 use bitExpert\Adrenaline\Adrenaline;
@@ -44,9 +46,8 @@ class Config
      *     @Parameter({"name" = "app.datadir"}),
      *     @Parameter({"name" = "app.templatedir"})
      * })
-     * @return Twig_Environment
      */
-    public function twigEnv($datadir = '', $templatedir = '')
+    public function twigEnv($datadir = '', $templatedir = '') : Twig_Environment
     {
         $twigEnv = new Twig_Environment(
             new Twig_Loader_Filesystem([$datadir, $templatedir]),
@@ -60,9 +61,8 @@ class Config
 
     /**
      * @Bean
-     * @return \bitExpert\Adroit\Action\Resolver\ContainerActionResolver
      */
-    protected function containerActionResolver()
+    protected function containerActionResolver() : ContainerActionResolver
     {
         $beanFactory = \bitExpert\Disco\BeanFactoryRegistry::getInstance();
         return new ContainerActionResolver($beanFactory);
@@ -70,9 +70,8 @@ class Config
 
     /**
      * @Bean
-     * @return \bitExpert\Adroit\Responder\Resolver\ContainerResponderResolver
      */
-    protected function containerResponderResolver()
+    protected function containerResponderResolver() : ContainerResponderResolver
     {
         $beanFactory = \bitExpert\Disco\BeanFactoryRegistry::getInstance();
         return new ContainerResponderResolver($beanFactory);
@@ -83,11 +82,10 @@ class Config
      * @Parameters({
      *     @Parameter({"name" = "app.datadir"})
      * })
-     * @return \bitExpert\Pathfinder\Psr7Router
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    protected function router($datadir = '')
+    protected function router($datadir = '') : Psr7Router
     {
         $defaultRoute = RouteBuilder::route()
             ->get('/')
@@ -109,9 +107,8 @@ class Config
      *     @Parameter({"name" = "app.datadir"}),
      *     @Parameter({"name" = "app.assetdir"})
      * })
-     * @return ExportCommand
      */
-    protected function exportCommand($exportdir = '', $datadir = '', $assetdir = '')
+    protected function exportCommand($exportdir = '', $datadir = '', $assetdir = '') : ExportCommand
     {
         $app = new Adrenaline(
             [$this->containerActionResolver()],
@@ -127,9 +124,8 @@ class Config
 
     /**
      * @Bean
-     * @return InitCommand
      */
-    protected function initCommand()
+    protected function initCommand() : InitCommand
     {
         return new InitCommand();
     }
@@ -140,9 +136,8 @@ class Config
      *     @Parameter({"name" = "app.datadir"}),
      *     @Parameter({"name" = "app.defaultpage"})
      * })
-     * @return HandlePageAction
      */
-    public function handleDefaultRouteAction($datadir = '', $defaultpage = '')
+    public function handleDefaultRouteAction($datadir = '', $defaultpage = '') : HandleDefaultPageAction
     {
         return new HandleDefaultPageAction($datadir, $defaultpage);
     }
@@ -152,9 +147,8 @@ class Config
      * @Parameters({
      *     @Parameter({"name" = "app.datadir"})
      * })
-     * @return HandlePageAction
      */
-    public function handlePageAction($datadir = '')
+    public function handlePageAction($datadir = ''): HandlePageAction
     {
         return new HandlePageAction($datadir);
     }
@@ -164,18 +158,16 @@ class Config
      * @Parameters({
      *     @Parameter({"name" = "site", "default" = "[]"})
      * })
-     * @return \bitExpert\AddItEasy\Http\Responder\TwigResponder
      */
-    public function renderPage(array $siteParams = [])
+    public function renderPage(array $siteParams = []) : TwigResponder
     {
         return new TwigResponder($this->twigEnv(), $siteParams);
     }
 
     /**
      * @Bean
-     * @return \bitExpert\Adrenaline\Adrenaline
      */
-    public function webapp()
+    public function webapp() : Adrenaline
     {
         $app = new Adrenaline(
             [$this->containerActionResolver()],
@@ -190,9 +182,8 @@ class Config
 
     /**
      * @Bean
-     * @return Application
      */
-    public function cliapp()
+    public function cliapp() : Application
     {
         $app = new Application();
         $app->addCommands([$this->exportCommand(), $this->initCommand()]);

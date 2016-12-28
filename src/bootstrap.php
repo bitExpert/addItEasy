@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+declare(strict_types = 1);
 
 require __DIR__ . '/../config/config.inc.php';
 
@@ -33,12 +34,7 @@ if (isset($APP_CONF['di'], $APP_CONF['di']['cache']) and !is_dir($APP_CONF['di']
 }
 
 // Configure and set up the BeanFactory instance
-$config = new \bitExpert\Disco\BeanFactoryConfiguration(
-    $APP_CONF['di']['cache'],
-    null,
-    null,
-    !$APP_CONF['di']['devMode']
-);
+$config = new \bitExpert\Disco\BeanFactoryConfiguration($APP_CONF['di']['cache']);
 $beanFactory = new \bitExpert\Disco\AnnotationBeanFactory($APP_CONF['di']['config'], $APP_CONF, $config);
 \bitExpert\Disco\BeanFactoryRegistry::register($beanFactory);
 
