@@ -8,6 +8,8 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+declare(strict_types = 1);
+
 namespace bitExpert\AddItEasy\Http\Responder;
 
 use bitExpert\Adrenaline\Domain\DomainPayload;
@@ -59,7 +61,7 @@ class TwigResponder implements Responder
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      */
-    public function __invoke(Payload $payload, ResponseInterface $response)
+    public function __invoke(Payload $payload, ResponseInterface $response) : ResponseInterface
     {
         /** @var DomainPayload $payload */
         /** @var Page $page */
@@ -71,13 +73,12 @@ class TwigResponder implements Responder
             $response->getBody()->write(
                 $this->twig->render($page->getRelativeFilePath(), ['page' => $page, 'site' => $this->siteParams])
             );
-            $response = $response->withHeader('Content-Type', 'text/html');
-            $response = $response->withHeader('X-Easy-Name', $page->getName());
-            return $response->withStatus($status);
         } catch (\Exception $e) {
             $this->logger->debug(sprintf('Twig rendering failed, due to "%s"', $e->getMessage()));
         }
 
-        return null;
+        $response = $response->withHeader('Content-Type', 'text/html');
+        $response = $response->withHeader('X-Easy-Name', $page->getName());
+        return $response->withStatus($status);
     }
 }

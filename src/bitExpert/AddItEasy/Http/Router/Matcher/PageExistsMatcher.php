@@ -8,6 +8,8 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+declare(strict_types = 1);
+
 namespace bitExpert\AddItEasy\Http\Router\Matcher;
 
 use bitExpert\AddItEasy\Domain\Page;
@@ -40,7 +42,7 @@ class PageExistsMatcher implements Matcher
     /**
      * {@inheritdoc}
      */
-    public function __invoke($value)
+    public function __invoke($value) : bool
     {
         try {
             new Page($this->basePath, $value);

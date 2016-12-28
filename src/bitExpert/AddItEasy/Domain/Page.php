@@ -8,6 +8,8 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+declare(strict_types = 1);
+
 namespace bitExpert\AddItEasy\Domain;
 
 class Page
@@ -58,7 +60,7 @@ class Page
     /**
      * @return string
      */
-    public function getName()
+    public function getName() : string
     {
         return $this->name;
     }
@@ -66,7 +68,7 @@ class Page
     /**
      * @return string
      */
-    public function getAbsoluteFilePath()
+    public function getAbsoluteFilePath() : string
     {
         $pages = glob($this->pagePath . DIRECTORY_SEPARATOR . '*');
         return $pages[0];
@@ -75,7 +77,7 @@ class Page
     /**
      * @return string
      */
-    public function getRelativeFilePath()
+    public function getRelativeFilePath() : string
     {
         $absolutePath = $this->getAbsoluteFilePath();
         return str_replace($this->basePath, '', $absolutePath);
@@ -84,7 +86,7 @@ class Page
     /**
      * @return Page[]
      */
-    public function getSiblings()
+    public function getSiblings() : \Iterator
     {
         $sourceDir = dirname($this->pagePath);
         $relativeSourceDirPath = ltrim(str_replace($this->basePath, '', $sourceDir), DIRECTORY_SEPARATOR);
