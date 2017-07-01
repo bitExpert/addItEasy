@@ -18,7 +18,6 @@ use bitExpert\Adroit\Responder\Resolver\ContainerResponderResolver;
 use bitExpert\Disco\Annotations\Bean;
 use bitExpert\Disco\Annotations\Configuration;
 use bitExpert\Disco\Annotations\Parameter;
-use bitExpert\Disco\Annotations\Parameters;
 use bitExpert\AddItEasy\Cli\Command\ExportCommand;
 use bitExpert\AddItEasy\Cli\Command\InitCommand;
 use bitExpert\AddItEasy\Export\FileEmitter;
@@ -29,6 +28,7 @@ use bitExpert\AddItEasy\Http\Responder\TwigResponder;
 use bitExpert\AddItEasy\Http\Router\Matcher\PageExistsMatcher;
 use bitExpert\AddItEasy\Http\Router\Psr7Router;
 use bitExpert\AddItEasy\Twig\Extension;
+use bitExpert\Disco\BeanFactoryRegistry;
 use bitExpert\Pathfinder\RouteBuilder;
 use Symfony\Component\Console\Application;
 use Twig_Environment;
@@ -41,10 +41,11 @@ use Twig_Loader_Filesystem;
 class Config
 {
     /**
-     * @Bean
-     * @Parameters({
+     * @Bean({
+     *   "parameters"={
      *     @Parameter({"name" = "app.datadir"}),
      *     @Parameter({"name" = "app.templatedir"})
+     *   }
      * })
      */
     public function twigEnv($datadir = '', $templatedir = '') : Twig_Environment
@@ -61,26 +62,29 @@ class Config
 
     /**
      * @Bean
+     * @throws \RuntimeException
      */
     protected function containerActionResolver() : ContainerActionResolver
     {
-        $beanFactory = \bitExpert\Disco\BeanFactoryRegistry::getInstance();
+        $beanFactory = BeanFactoryRegistry::getInstance();
         return new ContainerActionResolver($beanFactory);
     }
 
     /**
      * @Bean
+     * @throws \RuntimeException
      */
     protected function containerResponderResolver() : ContainerResponderResolver
     {
-        $beanFactory = \bitExpert\Disco\BeanFactoryRegistry::getInstance();
+        $beanFactory = BeanFactoryRegistry::getInstance();
         return new ContainerResponderResolver($beanFactory);
     }
 
     /**
-     * @Bean
-     * @Parameters({
+     * @Bean({
+     *   "parameters"={
      *     @Parameter({"name" = "app.datadir"})
+     *   }
      * })
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
@@ -101,12 +105,15 @@ class Config
     }
 
     /**
-     * @Bean
-     * @Parameters({
+     * @Bean({
+     *   "parameters"={
      *     @Parameter({"name" = "app.exportdir"}),
      *     @Parameter({"name" = "app.datadir"}),
      *     @Parameter({"name" = "app.assetdir"})
+     *   }
      * })
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      */
     protected function exportCommand($exportdir = '', $datadir = '', $assetdir = '') : ExportCommand
     {
@@ -131,10 +138,11 @@ class Config
     }
 
     /**
-     * @Bean
-     * @Parameters({
+     * @Bean({
+     *   "parameters"={
      *     @Parameter({"name" = "app.datadir"}),
      *     @Parameter({"name" = "app.defaultpage"})
+     *   }
      * })
      */
     public function handleDefaultRouteAction($datadir = '', $defaultpage = '') : HandleDefaultPageAction
@@ -143,9 +151,10 @@ class Config
     }
 
     /**
-     * @Bean
-     * @Parameters({
+     * @Bean({
+     *   "parameters"={
      *     @Parameter({"name" = "app.datadir"})
+     *   }
      * })
      */
     public function handlePageAction($datadir = ''): HandlePageAction
@@ -154,9 +163,10 @@ class Config
     }
 
     /**
-     * @Bean
-     * @Parameters({
+     * @Bean({
+     *   "parameters"={
      *     @Parameter({"name" = "site", "default" = "[]"})
+     *   }
      * })
      */
     public function renderPage(array $siteParams = []) : TwigResponder
@@ -166,6 +176,8 @@ class Config
 
     /**
      * @Bean
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      */
     public function webapp() : Adrenaline
     {
